@@ -43,9 +43,8 @@ class User(AbstractUser):
 
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     email = models.EmailField(max_length=256, unique=True, verbose_name='Email Address')
-    password = models.CharField(max_length=256)
-    
     name = models.CharField(max_length=256, verbose_name='User\'s full name')
+    
     course_module = models.CharField(choices=Modules.choices, default=Modules.DEFAULT, max_length=20)
     bio = models.TextField(max_length=512, default='A cool bio',null=False, verbose_name='Information about user')
     contact = models.CharField(max_length=256)
