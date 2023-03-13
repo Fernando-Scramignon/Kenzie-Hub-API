@@ -46,7 +46,7 @@ class User(AbstractUser):
     name = models.CharField(max_length=256, verbose_name='User\'s full name')
     
     course_module = models.CharField(choices=Modules.choices, default=Modules.DEFAULT, max_length=20)
-    bio = models.TextField(max_length=512, default='A cool bio',null=False, verbose_name='Information about user')
+    bio = models.TextField(max_length=512, default='A cool bio', null=False, verbose_name='Information about user')
     contact = models.CharField(max_length=256)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='Date of creation')
