@@ -50,7 +50,7 @@ class User(AbstractUser):
     contact = models.CharField(max_length=256)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='Date of creation')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Last date the field got update')
+    updated_at = models.DateTimeField(auto_now=True, editable=False, verbose_name='Last date the field got update')
 
     avatar_url = models.CharField(max_length=256, null=True)
 

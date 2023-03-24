@@ -10,6 +10,6 @@ class StatusChoices(models.TextChoices):
 class Tech(models.Model):
     id = models.UUIDField(default=uuid4, primary_key=True, editable=False)
     title = models.CharField(max_length=256)
-    status = models.CharField(max_length=256, choices=StatusChoices.choices)
+    status = models.CharField(max_length=256, choices=StatusChoices.choices, default=StatusChoices.BEGINNER)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='Date of creation')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Date of last modification')
