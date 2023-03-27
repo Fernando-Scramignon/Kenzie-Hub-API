@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView 
 
-# Create your views here.
+from .models import Tech
+from .serializers import TechSerializer
+
+class TechView(ListCreateAPIView):
+    queryset = Tech.objects.all()
+    serializer_class = TechSerializer
