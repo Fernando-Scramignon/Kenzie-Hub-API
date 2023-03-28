@@ -8,5 +8,5 @@ class TechSerializer(ModelSerializer):
     class Meta:
         model = Tech
 
-        field = '__all__'
+        exclude = ['user']
         read_only_fields = ['id', 'created_at', 'updated_at']
