@@ -3,7 +3,6 @@ from .models import Tech
 from users.serializers import UserSerializer
 
 class TechSerializer(ModelSerializer):
-    user = UserSerializer()
 
     class Meta:
         model = Tech
