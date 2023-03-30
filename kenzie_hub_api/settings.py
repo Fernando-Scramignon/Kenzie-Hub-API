@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 """
 Django settings for kenzie_hub_api project.
 
@@ -148,4 +150,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+
+# simple jwt
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=3)
 }
