@@ -22,4 +22,7 @@ class TechView(ListCreateAPIView):
     def perform_create(self, serializer):
         # saves user from Token (instead of directly from request data)
         serializer.save(user=self.request.user)
-
+    
+    def get_queryset(self):
+        # only allow the current user tech's to be displayed
+        return self.queryset.filter(user_id=self.request.user.id)
