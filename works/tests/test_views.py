@@ -4,6 +4,8 @@ from rest_framework import status
 from works.models import Work
 from users.models import User
 
+from utils.functions import client_login
+
 import ipdb
 
 class WorkTest(APITestCase):
@@ -132,13 +134,3 @@ class WorkTest(APITestCase):
 
         self.assertEqual(len(listing_response.data), 1)
         self.assertEqual(listing_response.data[0]['title'], self.work_data_alt['title'])
-
-
-
-def client_login(client, login_data, login_url):
-    login_response = client.post(login_url, login_data)
-    token = login_response.data['access']
-
-    client.credentials(
-        HTTP_AUTHORIZATION='Bearer ' + token
-    )
