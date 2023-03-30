@@ -4,7 +4,7 @@ from .models import User
 from techs.serializers import TechSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    techs = TechSerializer(many=True)
+    techs = TechSerializer(many=True, required=False)
 
     class Meta:
         model = User
