@@ -2,9 +2,11 @@ from rest_framework import serializers
 
 from .models import User
 from techs.serializers import TechSerializer
+from works.serializers import WorkSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     techs = TechSerializer(many=True, required=False)
+    works = WorkSerializer(many=True, required=False)
 
     class Meta:
         model = User
@@ -12,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'email','password',
             'course_module','bio','contact',
-            'created_at', 'updated_at','avatar_url', 'techs'
+            'created_at', 'updated_at','avatar_url', 'techs', 'works'
         ]
         
 
