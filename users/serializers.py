@@ -1,15 +1,18 @@
 from rest_framework import serializers
 
 from .models import User
+from techs.serializers import TechSerializer
 
 class UserSerializer(serializers.ModelSerializer):
+    techs = TechSerializer(many=True)
+
     class Meta:
         model = User
 
         fields = [
             'id', 'name', 'email','password',
             'course_module','bio','contact',
-            'created_at', 'updated_at','avatar_url',
+            'created_at', 'updated_at','avatar_url', 'techs'
         ]
         
 

@@ -16,4 +16,4 @@ class Tech(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='Date of creation')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Date of last modification')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='techs')

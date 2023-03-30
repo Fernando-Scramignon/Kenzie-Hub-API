@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Tech
-from users.serializers import UserSerializer
+
 
 class TechSerializer(ModelSerializer):
 
