@@ -51,7 +51,7 @@ class TechCreationTest(APITestCase):
         )
 
         expected_response_fields = ['id', 'title', 'status', 'created_at', 'updated_at']
-        isResponseCorrect = True
+        is_response_correct = True
 
         response = self.client.post(self.creation_url, self.tech_data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -59,9 +59,9 @@ class TechCreationTest(APITestCase):
         data = response.data
         for key in data.keys():
             if key not in expected_response_fields:
-                isResponseCorrect = False
+                is_response_correct = False
 
-        self.assertTrue(isResponseCorrect)
+        self.assertTrue(is_response_correct)
        
 
     def test_creation_without_authentication(self):
@@ -82,7 +82,6 @@ class TechCreationTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['status'], expected_status_field)
 
-    # this functionality is not complete yet
     def test_creating_tech_with_same_title(self):
         login_response = self.client.post(self.login_url, self.user_data_login)
         token = login_response.data['access']
