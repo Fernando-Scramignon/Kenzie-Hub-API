@@ -6,10 +6,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from users.models import User
 
+from utils.functions import client_login
+
+# remember to refactor the tests
 class TechCreationTest(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.creation_url = '/api/techs/'
+        cls.listing_url = cls.creation_url
         cls.login_url = '/api/login/'
 
         cls.user_data = {
@@ -17,19 +21,35 @@ class TechCreationTest(APITestCase):
                 'email': 'johndoe@gmail.com',
                 'contact': 'someLinkedin',
                 'password': '1234'
-            }
+        }
+
+        cls.user_data_alt = {
+            'name': 'Jack Smith',
+            'email': 'jacksmith@gmail.com',
+            'contact': 'someLinkedin',
+            'password': '1234'
+        }
 
         cls.user_data_login = {
             'email': cls.user_data['email'],
             'password': cls.user_data['password']
+        }
+
+        cls.user_data_login_alt = {
+            'email': cls.user_data_alt['email'],
+            'password': cls.user_data_alt['password']
         }
         
         cls.user = User.objects.create_user(
             **cls.user_data
         )
 
+        cls.user_alt = User.objects.create_user(
+            **cls.user_data_alt
+        )
 
         cls.user.save()
+        cls.user_alt.save()
 
         cls.tech_data = {
             'title': 'React',
@@ -94,3 +114,29 @@ class TechCreationTest(APITestCase):
 
         response = self.client.post(self.creation_url, self.tech_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_techs_should_not_be_unique(self):
+        # logs in as first user
+        client_login(self.client, self.user_data_login, self.login_url)
+
+        _ = self.client.post(self.creation_url, self.tech_data)
+
+        # logs in as second user
+        client_login(self.client, self.user_data_login_alt, self.login_url)
+
+        response = self.client.post(self.creation_url, self.tech_data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    
+    def test_can_only_list_own_tech(self):
+
+        client_login(self.client, self.user_data_login, self.login_url)
+        creation_response = self.client.post(self.creation_url, self.tech_data)
+        listing_response = self.client.get(self.listing_url)
+        self.assertEqual(len(listing_response.data), 1)
+        self.assertEqual(listing_response.data[0]['title'], self.tech_data['title'])
+
+        client_login(self.client, self.user_data_login_alt, self.login_url)
+        creation_response = self.client.post(self.creation_url, self.tech_data_without_status)
+        listing_response = self.client.get(self.listing_url)
+        self.assertEqual(len(listing_response.data), 1)
+        self.assertEqual(listing_response.data[0]['title'], self.tech_data_without_status['title'])
