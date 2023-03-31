@@ -62,13 +62,8 @@ class TechCreationTest(APITestCase):
             'description': 'The language that created minecraft',
             }
 
-    def test_creation_with_defaults(self):
-        login_response = self.client.post(self.login_url, self.user_data_login)
-        token = login_response.data['access']
-
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Bearer ' + token
-        )
+    def test_should_be_able_to_create_with_defaults(self):
+        client_login(self.client, self.user_data_login, self.login_url)
 
         expected_response_fields = ['id', 'title', 'status', 'created_at', 'updated_at']
         is_response_correct = True
@@ -84,17 +79,12 @@ class TechCreationTest(APITestCase):
         self.assertTrue(is_response_correct)
        
 
-    def test_creation_without_authentication(self):
+    def test_should_not_be_able_to_create_without_authentication(self):
         response = self.client.post(self.creation_url, self.tech_data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_creating_without_status(self):
-        login_response = self.client.post(self.login_url, self.user_data_login)
-        token = login_response.data['access']
-
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Bearer ' + token
-        )
+    def test_should_be_able_to_create_without_status(self):
+        client_login(self.client, self.user_data_login, self.login_url)
 
         expected_status_field = 'Iniciante'
 
@@ -102,13 +92,8 @@ class TechCreationTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['status'], expected_status_field)
 
-    def test_creating_tech_with_same_title(self):
-        login_response = self.client.post(self.login_url, self.user_data_login)
-        token = login_response.data['access']
-
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Bearer ' + token
-        )
+    def test_should_not_be_able_to_create_tech_with_same_title(self):
+        client_login(self.client, self.user_data_login, self.login_url)
 
         _ = self.client.post(self.creation_url, self.tech_data)
 
@@ -128,7 +113,6 @@ class TechCreationTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     
     def test_can_only_list_own_tech(self):
-
         client_login(self.client, self.user_data_login, self.login_url)
         creation_response = self.client.post(self.creation_url, self.tech_data)
         listing_response = self.client.get(self.listing_url)
