@@ -57,7 +57,7 @@ class TechDetailView(RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
 
         techs = self.request.user.techs.all()
-        title = self.request.data['title']
+        title = self.request.data.get('title')
 
         is_title_unique = True
 
