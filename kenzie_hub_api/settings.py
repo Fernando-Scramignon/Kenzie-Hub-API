@@ -1,4 +1,5 @@
 from datetime import timedelta
+import os
 
 """
 Django settings for kenzie_hub_api project.
@@ -22,12 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x4g%3&7z=2355oput5uth=%266^@y35(rfnhwye-ajc#82a72z'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='please_work')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('ENV') == 'production':
+    DEBUG = False
+else:
+    DEBUG = True
+    
 
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
