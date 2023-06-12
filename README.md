@@ -49,7 +49,6 @@ Tecnologias:
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
 - [Django Rest Framework](https://www.django-rest-framework.org/)
-- [Docker](https://www.docker.com/)
 - [Postgresql](https://www.postgresql.org/)
 
 
