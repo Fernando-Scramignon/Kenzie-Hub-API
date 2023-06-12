@@ -6,7 +6,7 @@
 
 <hr>
 
-- [Sumário](#sumario)
+- [Resumo](#resumo)
 - [Diagrama ER](#diagrama-er)
 - [Configuração](#configuração)
 	- [Banco de dados](#banco-de-dados)
@@ -24,14 +24,6 @@
 		- [Deleção de tecnologias](#deleção-de-tecnologias)
 		- [Edição de tecnologias](#edição-de-tecnologias)
 	
-
-<br>
-
-## Diagrama ER
-
-<hr>
-
-![Diagrama ER](kenzie_hub_ER_diagram.jpg)
 
 <br>
 
@@ -54,6 +46,15 @@ Tecnologias:
 
 
 <br>
+
+## Diagrama ER
+
+<hr>
+
+![Diagrama ER](kenzie_hub_ER_diagram.jpg)
+
+<br>
+
 
 ## Configuração
 
