@@ -42,6 +42,7 @@
 Um projeto que permite o gerenciamento e exposição de tecnologias conhecidas e projetos feitos. Esta aplicação foi feita utilizando Django e Django Rest Framework, além disso é totalmente testada. O objetivo é ser uma API para uma outra aplicação Front End de mesmo nome.
 
 
+URL base da aplicação: https://kenzie-hub-api-production.up.railway.app/api <br>
 URL local: http://localhost:8000/api
 
 Tecnologias:
@@ -171,7 +172,7 @@ Rota que permite a criação de usuários. Os campo created_at e updated_at são
 
 ```
 POST /api/users/
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: None
 Content-type: application/json
 ```
@@ -228,7 +229,7 @@ Rota que permite a autenticação do usuário e retorna um token que é utilizad
 
 ```
 POST /api/login
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: None
 Content-type: application/json
 ```
@@ -273,7 +274,7 @@ Rota que permite a listagem das informações de um usuário. O usuário só pod
 
 ```
 GET /api/users/
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: Token
 Content-type: application/json
 ```
@@ -362,7 +363,7 @@ Rota que permite a criação de de uma tecnologia. As informações do usuário 
 
 ```
 POST /api/techs/
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: Token
 Content-type: application/json
 ```
@@ -413,7 +414,7 @@ Rota que permite o usuário ver suas tecnologias registradas.
 
 ```
 GET /api/techs/
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: Token
 Content-type: application/json
 ```
@@ -470,7 +471,7 @@ Substitua o id pelo id da tecnologia que será deletada.
 
 ```
 DELETE /api/techs/id
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: Token
 Content-type: application/json
 ```
@@ -512,7 +513,7 @@ Substitua o id pelo id da tecnologia que será editada.
 
 ```
 PATCH /api/techs/id
-Host: http://localhost:8000
+Host: https://kenzie-hub-api-production.up.railway.app
 Authorization: Token
 Content-type: application/json
 ```
